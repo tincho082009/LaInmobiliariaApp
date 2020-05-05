@@ -61,7 +61,7 @@
         tools:layout="@layout/fragment_propiedades" />
     <fragment
         android:id="@+id/nav_contenedor"
-        android:name="com.example.inmobiliaria.ContenedorFragment"
-        android:label="fragment_contenedor"
-        tools:layout="@layout/fragment_contenedor" />
+        android:name="com.example.inmobiliaria.ui.propiedades.PropiedadesContainerFragment"
+        android:label="PropiedadesContainerFragment"
+        tools:layout="@layout/fragment_propiedades_container"/>
 </navigation>

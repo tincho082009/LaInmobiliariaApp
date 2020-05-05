@@ -31,6 +31,7 @@ public class SalidaFragment extends Fragment {
 
     private void notificacion() { new AlertDialog.Builder(getContext()).setTitle("Cerrar sesion")
             .setMessage("¿Desea cerrar sesion?")
+            .setCancelable(false)
             .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
