@@ -64,4 +64,9 @@
         android:name="com.example.inmobiliaria.ui.propiedades.PropiedadesContainerFragment"
         android:label="PropiedadesContainerFragment"
         tools:layout="@layout/fragment_propiedades_container"/>
+    <fragment
+        android:id="@+id/nav_conenedor_inquilino"
+        android:name="com.example.inmobiliaria.ui.inquilinos.InquilinoContainerFragment"
+        android:label="fragment_inquilino_container"
+        tools:layout="@layout/fragment_inquilino_container" />
 </navigation>

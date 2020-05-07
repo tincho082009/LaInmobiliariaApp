@@ -11,7 +11,8 @@ public class PropiedadesViewModel extends ViewModel {
     private MutableLiveData<Boolean> estado;
     private  MutableLiveData<String> textoBoton;
     private MutableLiveData<Boolean> alquilada;
-    private Inmueble i ;
+    private Inmueble inm1 ;
+    private Inmueble inm2;
 
     public LiveData<Inmueble> getInmueble(){
         if(inmuebleMutableLiveData == null) {
@@ -42,8 +43,10 @@ public class PropiedadesViewModel extends ViewModel {
     }
 
     public void rellenar(){
-        i = new Inmueble("Nose", 2, "Casa", "Residencial", 10000, true, 1, true);
-        inmuebleMutableLiveData.setValue(i);
+        inm1 = new Inmueble("Nose", 2, "Casa", "Residencial", 10000, true, 1, true);
+        inm2 = new Inmueble("Nose2", 2, "Departamento", "Residencial", 9000, true, 2, false);
+
+        inmuebleMutableLiveData.setValue(inm1);
         estado.setValue(false);
         alquilada.setValue(inmuebleMutableLiveData.getValue().isAlquilada());
     }
@@ -58,8 +61,8 @@ public class PropiedadesViewModel extends ViewModel {
 
     public void guardar(Boolean estado1){
         if(estado.getValue() && alquilada.getValue()){
-            i.setEstado(estado1);
-            inmuebleMutableLiveData.setValue(i);
+            inm1.setEstado(estado1);
+            inmuebleMutableLiveData.setValue(inm1);
             textoBoton.setValue("Editar");
             estado.setValue(false);
         }else{
