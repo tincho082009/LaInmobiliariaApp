@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.inmobiliaria.modelos.Inmueble;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PropiedadesViewModel extends ViewModel {
     private MutableLiveData<Inmueble> inmuebleMutableLiveData;
     private MutableLiveData<Boolean> estado;
@@ -13,6 +16,7 @@ public class PropiedadesViewModel extends ViewModel {
     private MutableLiveData<Boolean> alquilada;
     private Inmueble inm1 ;
     private Inmueble inm2;
+    private MutableLiveData<List<String>> listaDirecciones;
 
     public LiveData<Inmueble> getInmueble(){
         if(inmuebleMutableLiveData == null) {
@@ -68,5 +72,20 @@ public class PropiedadesViewModel extends ViewModel {
         }else{
             estado.setValue(true);
         }
+    }
+
+
+    public LiveData<List<String>> getListaDirecciones(){
+        if(listaDirecciones == null) {
+            listaDirecciones = new MutableLiveData<>();
+        }
+        return listaDirecciones;
+    }
+
+    public void cargarDatos(){
+        ArrayList<String> lista = new ArrayList<>();
+        lista.add("Nose1");
+        lista.add("Nose2");
+        listaDirecciones.setValue(lista);
     }
 }

@@ -69,4 +69,22 @@
         android:name="com.example.inmobiliaria.ui.inquilinos.InquilinoContainerFragment"
         android:label="fragment_inquilino_container"
         tools:layout="@layout/fragment_inquilino_container" />
+    <fragment
+        android:id="@+id/nav_contenedor_pagos"
+        android:name="com.example.inmobiliaria.ui.pagos.PagosContainerFragment"
+        android:label="fragment_pagos_container"
+        tools:layout="@layout/fragment_pagos_container" >
+        <action
+            android:id="@+id/action_nav_contenedor_pagos_to_nav_lista_propiedades"
+            app:destination="@id/nav_lista_propiedades" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_lista_propiedades"
+        android:name="com.example.inmobiliaria.ui.propiedades.ListaPropiedadesFragment"
+        android:label="fragment_lista_propiedades"
+        tools:layout="@layout/fragment_lista_propiedades" >
+        <action
+            android:id="@+id/action_nav_lista_propiedades_to_nav_contenedor_pagos"
+            app:destination="@id/nav_contenedor_pagos" />
+    </fragment>
 </navigation>
