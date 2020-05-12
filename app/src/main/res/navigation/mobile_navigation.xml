@@ -83,7 +83,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_lista_propiedades"
-        android:name="com.example.inmobiliaria.ui.propiedades.ListaPropiedadesFragment"
+        android:name="com.example.inmobiliaria.ui.pagos.ListaPropiedadesPagosFragment"
         android:label="Listado de Propiedades"
         tools:layout="@layout/fragment_lista_propiedades">
         <action
@@ -94,5 +94,18 @@
         android:id="@+id/nav_contenedor_contrato"
         android:name="com.example.inmobiliaria.ui.contratos.ContratoContainerFragment"
         android:label="Contratos"
-        tools:layout="@layout/fragment_contrato_container" />
+        tools:layout="@layout/fragment_contrato_container" >
+        <action
+            android:id="@+id/action_nav_contenedor_contrato_to_nav_lista_propiedades_contrato"
+            app:destination="@id/nav_lista_propiedades_contrato" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_lista_propiedades_contrato"
+        android:name="com.example.inmobiliaria.ui.contratos.ListaPropiedadesContratosFragment"
+        android:label="Listado de Propiedades"
+        tools:layout="@layout/fragment_lista_propiedades_contratos">
+        <action
+            android:id="@+id/action_nav_lista_propiedades_contrato_to_nav_contenedor_contrato"
+            app:destination="@id/nav_contenedor_contrato" />
+    </fragment>
 </navigation>

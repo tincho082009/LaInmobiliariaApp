@@ -1,11 +1,14 @@
 package com.example.inmobiliaria.ui.contratos;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +26,20 @@ import java.util.List;
 
 public class ContratoContainerFragment extends Fragment {
     private ArrayList<ContratoAlquiler> lista = new ArrayList<ContratoAlquiler>();
-    private ContratosViewModel vm;
+    private ContratoContainerViewModel vm;
+    private TextView tvTitulo;
+    private ListView lv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ContratoContainerViewModel.class);
+        vm.getAdapter().observe(this, new Observer<ArrayAdapter<ContratoAlquiler>>() {
+            @Override
+            public void onChanged(ArrayAdapter<ContratoAlquiler> pagoArrayAdapter) {
+                lv.setAdapter(pagoArrayAdapter);
+            }
+        });
     }
 
     @Override
@@ -36,45 +47,14 @@ public class ContratoContainerFragment extends Fragment {
                              Bundle savedInstanceState) {
 
        View view= inflater.inflate(R.layout.fragment_contrato_container, container, false);
-
-        lista.add(new ContratoAlquiler(1000, "2020-05-15","2020-05-30",true, 1, 1));
-
-        ArrayAdapter<ContratoAlquiler> adapter = new ListAdapter(view.getContext(), R.layout.fragment_contratos, lista, getLayoutInflater());
-        ListView lv = view.findViewById(R.id.listaContratos);
-        lv.setAdapter(adapter);
+        tvTitulo = view.findViewById(R.id.tvTituloContratoContainer);
+        String x = getArguments().getString("direccion");
+        tvTitulo.setText(x);
+        tvTitulo.setBackgroundColor(Color.parseColor("#212121"));
+        vm.cargarDatos(getLayoutInflater());
+        lv = view.findViewById(R.id.listaContratos);
 
         return view;
     }
-    public class ListAdapter extends ArrayAdapter<ContratoAlquiler> {
-        private Context context;
-        private List<ContratoAlquiler> lista;
-        private LayoutInflater li;
-        public ListAdapter(@NonNull Context context, int resource, @NonNull List<ContratoAlquiler> objects, LayoutInflater li) {
-            super(context, resource, objects);
-            this.context = context;
-            this.lista = objects;
-            this.li = li;
-        }
 
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            View itemView = convertView;
-            if(itemView==null){
-                itemView = li.inflate(R.layout.fragment_contratos, parent, false);
-            }
-            ContratoAlquiler contratoAlquiler = lista.get(position);
-
-            TextView precio = itemView.findViewById(R.id.tvPrecioContrato);
-            precio.setText(contratoAlquiler.getMonto() +"");
-
-            TextView fechaInicio = itemView.findViewById(R.id.tvFechaInicio);
-            fechaInicio.setText(contratoAlquiler.getFechaInicio());
-
-            TextView fechaFinal = itemView.findViewById(R.id.tvFechaFinal);
-            fechaFinal.setText(contratoAlquiler.getFechaFinalizacion() +"");
-
-            return itemView;
-        }
-    }
 }

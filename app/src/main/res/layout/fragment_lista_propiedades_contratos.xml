@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.pagos.ListaPropiedadesPagosFragment">
+    tools:context=".ui.contratos.ListaPropiedadesContratosFragment">
 
     <ListView
-        android:id="@+id/listaPropiedades"
+        android:id="@+id/listaPropiedadesContratos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="#D35400"

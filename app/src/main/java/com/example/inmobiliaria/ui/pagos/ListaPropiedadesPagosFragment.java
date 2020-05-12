@@ -1,9 +1,10 @@
-package com.example.inmobiliaria.ui.propiedades;
+package com.example.inmobiliaria.ui.pagos;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -22,15 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ListaPropiedadesFragment extends Fragment {
+public class ListaPropiedadesPagosFragment extends Fragment {
     private ListView lv;
     ArrayList<Inmueble> lista = new ArrayList<>();
-    private PropiedadesViewModel vm;
+    private ListaPropiedadesPagosViewModel vm;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        vm = new PropiedadesViewModel();
+        vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ListaPropiedadesPagosViewModel.class);
         vm.getListaDirecciones().observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> strings) {

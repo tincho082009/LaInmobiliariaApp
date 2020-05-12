@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,18 +33,19 @@ import javax.xml.parsers.ParserConfigurationException;
 public class PagosContainerFragment extends Fragment {
     private ArrayList<Pago> lista = new ArrayList<Pago>();
     private TextView tvTitulo;
-    private PagosViewModel vm;
+    private PagosContainerViewModel vm;
+    private ListView lv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        vm = new PagosViewModel();
-        vm.getListaPagos().observe(this, new Observer<List<Pago>>() {
-            @Override
-            public void onChanged(List<Pago> pagos) {
-
-            }
-        });
+        vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PagosContainerViewModel.class);
+       vm.getAdapter().observe(this, new Observer<ArrayAdapter<Pago>>() {
+           @Override
+           public void onChanged(ArrayAdapter<Pago> pagoArrayAdapter) {
+               lv.setAdapter(pagoArrayAdapter);
+           }
+       });
     }
 
     @Override
@@ -51,49 +53,14 @@ public class PagosContainerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pagos_container, container, false);
-        lista.add(new Pago(1, "2020-05-15",2600,1));
-        lista.add(new Pago(2,"2020-05-16",2600,1));
-        lista.add(new Pago(3,"2020-05-17",2600,1));
         tvTitulo = view.findViewById(R.id.tvTituloPagosContainer);
         String x = getArguments().getString("direccion");
         tvTitulo.setText(x);
         tvTitulo.setBackgroundColor(Color.parseColor("#212121"));
-        ArrayAdapter<Pago> adapter = new ListAdapter(view.getContext(), R.layout.fragment_pagos, lista, getLayoutInflater());
-        ListView lv = view.findViewById(R.id.listaPagos);
-        lv.setAdapter(adapter);
+        vm.cargarDatos(getLayoutInflater());
+        lv = view.findViewById(R.id.listaPagos);
 
         return view;
     }
-    public class ListAdapter extends ArrayAdapter<Pago> {
-        private Context context;
-        private List<Pago> lista;
-        private LayoutInflater li;
-        public ListAdapter(@NonNull Context context, int resource, @NonNull List<Pago> objects, LayoutInflater li) {
-            super(context, resource, objects);
-            this.context = context;
-            this.lista = objects;
-            this.li = li;
-        }
 
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            View itemView = convertView;
-            if(itemView==null){
-                itemView = li.inflate(R.layout.fragment_pagos, parent, false);
-            }
-            Pago pago = lista.get(position);
-
-            TextView nroPago = itemView.findViewById(R.id.tvNroPago);
-            nroPago.setText(pago.getNroPago() +"");
-
-            TextView fechaPago = itemView.findViewById(R.id.tvFechaPago);
-            fechaPago.setText(pago.getFechaPago());
-
-            TextView importe = itemView.findViewById(R.id.tvImporte);
-            importe.setText(pago.getImporte() +"");
-
-            return itemView;
-        }
-    }
 }

@@ -25,7 +25,7 @@
             android:icon="@drawable/ic_pagos"
             android:title="Pagos" />
         <item
-            android:id="@+id/nav_contratos"
+            android:id="@+id/nav_lista_propiedades_contrato"
             android:icon="@drawable/ic_contratos"
             android:title="Contratos" />
     </group>

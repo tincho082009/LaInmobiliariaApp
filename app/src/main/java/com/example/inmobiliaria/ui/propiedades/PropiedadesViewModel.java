@@ -85,18 +85,4 @@ public class PropiedadesViewModel extends ViewModel {
             estado.setValue(true);
         }
     }
-
-    public LiveData<List<String>> getListaDirecciones(){
-        if(listaDirecciones == null) {
-            listaDirecciones = new MutableLiveData<>();
-        }
-        return listaDirecciones;
-    }
-
-    public void cargarDatos(){
-        ArrayList<String> lista = new ArrayList<>();
-        lista.add("Nose");
-        lista.add("Nose2");
-        listaDirecciones.setValue(lista);
-    }
 }
