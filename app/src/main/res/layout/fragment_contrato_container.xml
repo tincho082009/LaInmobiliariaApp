@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.propiedades.ListaPropiedadesFragment">
+    tools:context=".ui.contratos.ContratoContainerFragment">
 
     <ListView
-        android:id="@+id/listaPropiedades"
+        android:id="@+id/listaContratos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="#D35400"
-        android:dividerHeight="2dp"/>
+        android:divider="@color/colorPrimaryDark"
+        android:dividerHeight="5dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

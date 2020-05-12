@@ -1,6 +1,7 @@
 package com.example.inmobiliaria.ui.pagos;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import android.widget.TextView;
 import com.example.inmobiliaria.R;
 import com.example.inmobiliaria.modelos.Pago;
 
+import org.w3c.dom.Text;
+
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +31,19 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class PagosContainerFragment extends Fragment {
     private ArrayList<Pago> lista = new ArrayList<Pago>();
+    private TextView tvTitulo;
     private PagosViewModel vm;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        vm = new PagosViewModel();
+        vm.getListaPagos().observe(this, new Observer<List<Pago>>() {
+            @Override
+            public void onChanged(List<Pago> pagos) {
+
+            }
+        });
     }
 
     @Override
@@ -39,11 +51,13 @@ public class PagosContainerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pagos_container, container, false);
-
         lista.add(new Pago(1, "2020-05-15",2600,1));
         lista.add(new Pago(2,"2020-05-16",2600,1));
         lista.add(new Pago(3,"2020-05-17",2600,1));
-
+        tvTitulo = view.findViewById(R.id.tvTituloPagosContainer);
+        String x = getArguments().getString("direccion");
+        tvTitulo.setText(x);
+        tvTitulo.setBackgroundColor(Color.parseColor("#212121"));
         ArrayAdapter<Pago> adapter = new ListAdapter(view.getContext(), R.layout.fragment_pagos, lista, getLayoutInflater());
         ListView lv = view.findViewById(R.id.listaPagos);
         lv.setAdapter(adapter);

@@ -10,7 +10,9 @@ public class Inmueble {
     private int propietarioId;
     private boolean alquilada;
 
+    public Inmueble() {
 
+    }
     public Inmueble(String direccion, int cantAmbientes, String tipo, String uso, double precio, boolean estado, int propietarioId, boolean alquilada) {
         this.direccion = direccion;
         this.cantAmbientes = cantAmbientes;

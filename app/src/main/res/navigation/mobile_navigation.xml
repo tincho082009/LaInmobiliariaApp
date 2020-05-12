@@ -47,44 +47,52 @@
     <fragment
         android:id="@+id/nav_salida"
         android:name="com.example.inmobiliaria.ui.salida.SalidaFragment"
-        android:label="fragment_salida"
+        android:label="Logout"
         tools:layout="@layout/fragment_salida" />
     <fragment
         android:id="@+id/nav_perfil"
         android:name="com.example.inmobiliaria.ui.perfil.PerfilFragment"
-        android:label="fragment_perfil"
+        android:label="Perfil"
         tools:layout="@layout/fragment_perfil" />
     <fragment
         android:id="@+id/nav_propiedades"
         android:name="com.example.inmobiliaria.ui.propiedades.PropiedadesFragment"
-        android:label="fragment_propiedades"
+        android:label="Propiedades"
         tools:layout="@layout/fragment_propiedades" />
     <fragment
         android:id="@+id/nav_contenedor"
         android:name="com.example.inmobiliaria.ui.propiedades.PropiedadesContainerFragment"
-        android:label="PropiedadesContainerFragment"
-        tools:layout="@layout/fragment_propiedades_container"/>
+        android:label="Propiedades"
+        tools:layout="@layout/fragment_propiedades_container" />
     <fragment
         android:id="@+id/nav_conenedor_inquilino"
         android:name="com.example.inmobiliaria.ui.inquilinos.InquilinoContainerFragment"
-        android:label="fragment_inquilino_container"
+        android:label="Inquilinos"
         tools:layout="@layout/fragment_inquilino_container" />
     <fragment
         android:id="@+id/nav_contenedor_pagos"
         android:name="com.example.inmobiliaria.ui.pagos.PagosContainerFragment"
-        android:label="fragment_pagos_container"
-        tools:layout="@layout/fragment_pagos_container" >
+        android:label="Pagos"
+        tools:layout="@layout/fragment_pagos_container">
         <action
             android:id="@+id/action_nav_contenedor_pagos_to_nav_lista_propiedades"
+            app:destination="@id/nav_lista_propiedades" />
+        <action
+            android:id="@+id/action_nav_contenedor_pagos_to_nav_lista_propiedades2"
             app:destination="@id/nav_lista_propiedades" />
     </fragment>
     <fragment
         android:id="@+id/nav_lista_propiedades"
         android:name="com.example.inmobiliaria.ui.propiedades.ListaPropiedadesFragment"
-        android:label="fragment_lista_propiedades"
-        tools:layout="@layout/fragment_lista_propiedades" >
+        android:label="Listado de Propiedades"
+        tools:layout="@layout/fragment_lista_propiedades">
         <action
             android:id="@+id/action_nav_lista_propiedades_to_nav_contenedor_pagos"
             app:destination="@id/nav_contenedor_pagos" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_contenedor_contrato"
+        android:name="com.example.inmobiliaria.ui.contratos.ContratoContainerFragment"
+        android:label="Contratos"
+        tools:layout="@layout/fragment_contrato_container" />
 </navigation>

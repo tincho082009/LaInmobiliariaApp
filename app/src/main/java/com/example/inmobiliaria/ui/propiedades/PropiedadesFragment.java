@@ -1,11 +1,13 @@
 package com.example.inmobiliaria.ui.propiedades;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +22,20 @@ import com.example.inmobiliaria.modelos.Inmueble;
 
 public class PropiedadesFragment extends Fragment {
     private EditText etDomicilio, etAmbientes, etTipo, etUso, etPrecio;
+    private TextView tvCartel;
     private CheckBox cbDisponible;
     private Button btnEditar;
     private PropiedadesViewModel vm;
+    private Inmueble inm;
+
+    public PropiedadesFragment(Inmueble inm1){
+        this.inm = inm1;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        vm = new PropiedadesViewModel();
+        vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PropiedadesViewModel.class);;
         vm.getInmueble().observe(this, new Observer<Inmueble>() {
             @Override
             public void onChanged(Inmueble inmueble) {
@@ -43,7 +51,7 @@ public class PropiedadesFragment extends Fragment {
                 etPrecio.setEnabled(false);
                 cbDisponible.setChecked(inmueble.isEstado());
             }
-        });
+       });
         vm.getEstado().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -62,6 +70,13 @@ public class PropiedadesFragment extends Fragment {
                 btnEditar.setEnabled(aBoolean);
             }
         });
+        vm.getCartel().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                tvCartel.setText(s);
+                tvCartel.setTextColor(Color.parseColor("#D35400"));
+            }
+        });
 
     }
 
@@ -69,6 +84,7 @@ public class PropiedadesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root =  inflater.inflate(R.layout.fragment_propiedades, container, false);
+        tvCartel = root.findViewById(R.id.tvCartelPropiedades);
         etDomicilio = root.findViewById(R.id.etDomicilio);
         etAmbientes = root.findViewById(R.id.etAmbiente);
         etTipo = root.findViewById(R.id.etTipo);
@@ -76,8 +92,7 @@ public class PropiedadesFragment extends Fragment {
         etPrecio = root.findViewById(R.id.etPrecio);
         cbDisponible = root.findViewById(R.id.cbDisponible);
         btnEditar = root.findViewById(R.id.btnEditarPropiedad);
-
-        vm.rellenar();
+        vm.rellenar(inm);
 
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override

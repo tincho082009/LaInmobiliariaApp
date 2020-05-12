@@ -9,24 +9,9 @@ import androidx.lifecycle.ViewModel;
 import com.example.inmobiliaria.modelos.Propietario;
 
 public class LoginViewModel extends ViewModel {
-    private MutableLiveData<Boolean> email;
-    private MutableLiveData<Boolean> contrasenia;
     private MutableLiveData<String> cartelEmail;
     private  MutableLiveData<String> cartelContrasenia;
     private MutableLiveData<Boolean> activadorIntent;
-
-    public LiveData<Boolean> getEmail(){
-        if(email==null){
-            email =  new MutableLiveData<Boolean>();
-        }
-        return email;
-    }
-    public LiveData<Boolean> getContrasenia(){
-        if(contrasenia==null){
-            contrasenia = new MutableLiveData<Boolean>();
-        }
-        return contrasenia;
-    }
 
     public LiveData<String> getCartelEmail(){
         if(cartelEmail==null){
@@ -47,13 +32,6 @@ public class LoginViewModel extends ViewModel {
             activadorIntent = new MutableLiveData<Boolean>();
         }
         return activadorIntent;
-    }
-
-    public void enfocarEmail(Boolean booleanito){
-        email.setValue(booleanito);
-    }
-    public void enfocarContrasenia(Boolean booleanito){
-        contrasenia.setValue(booleanito);
     }
 
     public void validar(String mail, String contra) {

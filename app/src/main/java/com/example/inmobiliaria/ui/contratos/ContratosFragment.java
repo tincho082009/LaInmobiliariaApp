@@ -21,13 +21,7 @@ public class ContratosFragment extends Fragment {
                              Bundle savedInstanceState) {
         vm = new ContratosViewModel();
         View root = inflater.inflate(R.layout.fragment_contratos, container, false);
-        final TextView textView = root.findViewById(R.id.text_contratos);
-        vm.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
         return root;
     }
 }

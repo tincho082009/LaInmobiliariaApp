@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer;
 
 public class LoginActivity extends AppCompatActivity {
     EditText email, contrasenia;
-    TextView cartelEmail, cartelContrasenia, tituloEmail, tituloContrasenia;
+    TextView cartelEmail, cartelContrasenia;
     Button ingresar;
     LoginViewModel lvm;
     @Override
@@ -44,38 +44,10 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        lvm.getEmail().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-               tituloEmail.setTextColor(Color.parseColor("#03DAC6"));
-               tituloContrasenia.setTextColor(0xff000000);
-            }
-        });
-        lvm.getContrasenia().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                tituloContrasenia.setTextColor(Color.parseColor("#03DAC6"));
-                tituloEmail.setTextColor(0xff000000);
-            }
-        });
     }
     private void configurarVista(){
-        tituloEmail = findViewById(R.id.tituloEmail);
-        tituloContrasenia = findViewById(R.id.tituloContrasenia);
         email = findViewById(R.id.etEmail);
-        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                lvm.enfocarEmail(hasFocus);
-            }
-        });
         contrasenia = findViewById(R.id.etContrasenia);
-        contrasenia.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                lvm.enfocarContrasenia(hasFocus);
-            }
-        });
         ingresar = findViewById(R.id.btnIngresar);
         cartelContrasenia = findViewById(R.id.tvContrasenia);
         cartelEmail = findViewById(R.id.tvEmail);
