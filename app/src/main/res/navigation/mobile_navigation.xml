@@ -68,7 +68,11 @@
         android:id="@+id/nav_conenedor_inquilino"
         android:name="com.example.inmobiliaria.ui.inquilinos.InquilinoContainerFragment"
         android:label="Inquilinos"
-        tools:layout="@layout/fragment_inquilino_container" />
+        tools:layout="@layout/fragment_inquilino_container" >
+        <action
+            android:id="@+id/action_nav_conenedor_inquilino_to_nav_lista_propiedades_inquilino"
+            app:destination="@id/nav_lista_propiedades_inquilino" />
+    </fragment>
     <fragment
         android:id="@+id/nav_contenedor_pagos"
         android:name="com.example.inmobiliaria.ui.pagos.PagosContainerFragment"
@@ -107,5 +111,14 @@
         <action
             android:id="@+id/action_nav_lista_propiedades_contrato_to_nav_contenedor_contrato"
             app:destination="@id/nav_contenedor_contrato" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_lista_propiedades_inquilino"
+        android:name="com.example.inmobiliaria.ui.inquilinos.ListaPropiedadesInquilinoFragment"
+        android:label="Lista de Propiedades"
+        tools:layout="@layout/fragment_lista_propiedades_inquilino">
+        <action
+            android:id="@+id/action_nav_lista_propiedades_inquilino_to_nav_conenedor_inquilino"
+            app:destination="@id/nav_conenedor_inquilino" />
     </fragment>
 </navigation>

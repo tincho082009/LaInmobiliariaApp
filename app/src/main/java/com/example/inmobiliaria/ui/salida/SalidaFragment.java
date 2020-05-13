@@ -21,7 +21,7 @@ public class SalidaFragment extends Fragment {
     private SalidaViewModel vm;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                              Bundle savedInstanceState) {
         vm = new SalidaViewModel();
         View root = inflater.inflate(R.layout.fragment_salida, container, false);
         v = root;

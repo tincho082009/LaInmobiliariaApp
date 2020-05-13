@@ -1,6 +1,7 @@
 package com.example.inmobiliaria.ui.inquilinos;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ public class InquilinoContainerFragment extends Fragment {
     private ArrayList<Inquilino> lista = new ArrayList<Inquilino>();
     private InquilinoContainerViewModel vm;
     private ListView lv;
+    private TextView tvTitulo;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,10 @@ public class InquilinoContainerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_inquilino_container, container, false);
+        tvTitulo = view.findViewById(R.id.tvTituloInquilinoContainer);
+        String x = getArguments().getString("direccion");
+        tvTitulo.setText(x);
+        tvTitulo.setBackgroundColor(Color.parseColor("#212121"));
         lv = view.findViewById(R.id.listaInquilinos);
 
         vm.cargarDatos(getLayoutInflater());

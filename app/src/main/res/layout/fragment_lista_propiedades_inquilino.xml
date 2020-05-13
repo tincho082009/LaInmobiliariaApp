@@ -3,6 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.salida.SalidaFragment">
+    tools:context=".ui.inquilinos.ListaPropiedadesInquilinoFragment">
+
+    <ListView
+        android:id="@+id/listaPropiedadesInquilino"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#D35400"
+        android:dividerHeight="2dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,7 @@
             android:icon="@drawable/ic_propiedades"
             android:title="Propiedades" />
         <item
-            android:id="@+id/nav_conenedor_inquilino"
+            android:id="@+id/nav_lista_propiedades_inquilino"
             android:icon="@drawable/ic_inquilinos"
             android:title="Inquilinos" />
         <item
