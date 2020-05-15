@@ -64,12 +64,6 @@ public class PropiedadesFragment extends Fragment {
                 btnEditar.setText(s);
             }
         });
-        vm.getAlquilada().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                btnEditar.setEnabled(aBoolean);
-            }
-        });
         vm.getCartel().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
