@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +24,11 @@ public class PerfilFragment extends Fragment {
     private EditText etDni, etApellido, etNombre, etTelefono, etEmail, etContrasenia;
     private Button btnEditarPerfil;
     private PerfilViewModel vm;
-
+    private Propietario p = new Propietario();
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        vm = new PerfilViewModel();
+        vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PerfilViewModel.class);
 
         vm.getPropietario().observe(this, new Observer<Propietario>() {
             @Override
@@ -37,8 +38,15 @@ public class PerfilFragment extends Fragment {
                 etNombre.setText(propietario.getNombre());
                 etTelefono.setText(propietario.getTelefono());
                 etEmail.setText(propietario.getEmail());
-                etContrasenia.setText(propietario.getContrasenia());
+                etContrasenia.setText(propietario.getClave());
 
+                p.setId(propietario.getId());
+                p.setDni(propietario.getDni());
+                p.setApellido(propietario.getApellido());
+                p.setNombre(propietario.getNombre());
+                p.setTelefono(propietario.getTelefono());
+                p.setEmail(propietario.getEmail());
+                p.setClave(propietario.getClave());
             }
         });
         vm.getEstado().observe(this, new Observer<Boolean>() {
@@ -87,8 +95,14 @@ public class PerfilFragment extends Fragment {
          btnEditarPerfil.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 vm.guardar(etDni.getText().toString(), etApellido.getText().toString(), etNombre.getText().toString(), etTelefono.getText().toString(), etEmail.getText().toString(), etContrasenia.getText().toString());
-                vm.editar();
+                 p.setDni(etDni.getText().toString());
+                 p.setApellido(etApellido.getText().toString());
+                 p.setNombre(etNombre.getText().toString());
+                 p.setTelefono(etTelefono.getText().toString());
+                 p.setEmail(etEmail.getText().toString());
+                 p.setClave(etContrasenia.getText().toString());
+                 vm.guardar(p);
+                 vm.editar();
              }
          });
 

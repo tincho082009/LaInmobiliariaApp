@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_perfil1"
             android:title="Perfil" />
         <item
+            android:id="@+id/nav_agregar_inmueble"
+            android:icon="@drawable/ic_propiedades"
+            android:title="Agregar propiedades" />
+        <item
             android:id="@+id/nav_contenedor"
             android:icon="@drawable/ic_propiedades"
             android:title="Propiedades" />

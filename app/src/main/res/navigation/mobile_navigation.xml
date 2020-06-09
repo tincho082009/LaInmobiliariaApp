@@ -121,4 +121,9 @@
             android:id="@+id/action_nav_lista_propiedades_inquilino_to_nav_conenedor_inquilino"
             app:destination="@id/nav_conenedor_inquilino" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_agregar_inmueble"
+        android:name="com.example.inmobiliaria.ui.propiedades.AgregarInmuebleFragment"
+        android:label="Agregar Inmueble"
+        tools:layout="@layout/fragment_agregar_inmueble" />
 </navigation>

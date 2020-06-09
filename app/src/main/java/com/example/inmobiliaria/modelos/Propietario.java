@@ -1,20 +1,34 @@
 package com.example.inmobiliaria.modelos;
 
 public class Propietario {
+    private int id;
     private String dni;
     private String apellido;
     private String nombre;
     private String telefono;
     private String email;
-    private String contrasenia;
+    private String clave;
 
-    public Propietario(String dni, String apellido, String nombre, String telefono, String email, String contrasenia) {
+    public Propietario(){
+
+    }
+
+    public Propietario(int id, String dni, String apellido, String nombre, String telefono, String email, String clave) {
+        this.id = id;
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
-        this.contrasenia = contrasenia;
+        this.clave = clave;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDni() {
@@ -53,15 +67,28 @@ public class Propietario {
         return email;
     }
 
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    @Override
+    public String toString() {
+        return "Propietario{" +
+                "id=" + id +
+                ", dni='" + dni + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
+                ", clave='" + clave + '\'' +
+                '}';
     }
 }

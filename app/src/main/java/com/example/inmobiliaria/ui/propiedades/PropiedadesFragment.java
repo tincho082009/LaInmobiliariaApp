@@ -1,13 +1,16 @@
 package com.example.inmobiliaria.ui.propiedades;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +27,11 @@ public class PropiedadesFragment extends Fragment {
     private EditText etDomicilio, etAmbientes, etTipo, etUso, etPrecio;
     private TextView tvCartel;
     private CheckBox cbDisponible;
-    private Button btnEditar;
+    private Button btnEditar, btnBorrar;
     private PropiedadesViewModel vm;
+    private View v;
     private Inmueble inm;
+    private Inmueble inmRenovado = new Inmueble();
 
     public PropiedadesFragment(Inmueble inm1){
         this.inm = inm1;
@@ -55,6 +60,11 @@ public class PropiedadesFragment extends Fragment {
         vm.getEstado().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
+                etDomicilio.setEnabled(aBoolean);
+                etAmbientes.setEnabled(aBoolean);
+                etTipo.setEnabled(aBoolean);
+                etUso.setEnabled(aBoolean);
+                etPrecio.setEnabled(aBoolean);
                 cbDisponible.setEnabled(aBoolean);
             }
         });
@@ -78,6 +88,7 @@ public class PropiedadesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root =  inflater.inflate(R.layout.fragment_propiedades, container, false);
+        v = root;
         tvCartel = root.findViewById(R.id.tvCartelPropiedades);
         etDomicilio = root.findViewById(R.id.etDomicilio);
         etAmbientes = root.findViewById(R.id.etAmbiente);
@@ -86,17 +97,50 @@ public class PropiedadesFragment extends Fragment {
         etPrecio = root.findViewById(R.id.etPrecio);
         cbDisponible = root.findViewById(R.id.cbDisponible);
         btnEditar = root.findViewById(R.id.btnEditarPropiedad);
+        btnBorrar = root.findViewById(R.id.btnBorrarInmueble);
         vm.rellenar(inm);
 
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vm.guardar(cbDisponible.isChecked());
+                inmRenovado.setId(inm.getId());
+                inmRenovado.setDireccion(etDomicilio.getText().toString());
+                inmRenovado.setUso(etUso.getText().toString());
+                inmRenovado.setTipo(etTipo.getText().toString());
+                inmRenovado.setPrecio(Double.valueOf(etPrecio.getText().toString()));
+                inmRenovado.setCantAmbientes(Integer.parseInt(etAmbientes.getText().toString()));
+                inmRenovado.setEstado(cbDisponible.isChecked());
+                vm.guardar(inmRenovado);
                 vm.editar();
+            }
+        });
+        btnBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notificacion();
             }
         });
 
         return root;
+    }
+
+    private void notificacion() { new AlertDialog.Builder(getContext()).setTitle("Borrar")
+            .setMessage("¿Desea borrar este inmueble?")
+            .setCancelable(false)
+            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    vm.borrar(inm.getId());
+                    Navigation.findNavController(v).navigate(R.id.nav_contenedor, null);
+                }
+            })
+            .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            }).show();
+
     }
 
     public interface OnFragmentInteractionListener {

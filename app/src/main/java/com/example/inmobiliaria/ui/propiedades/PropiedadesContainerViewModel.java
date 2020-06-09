@@ -2,6 +2,9 @@ package com.example.inmobiliaria.ui.propiedades;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,17 +17,25 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.inmobiliaria.adapters.ViewPageAdapter;
 import com.example.inmobiliaria.modelos.Inmueble;
+import com.example.inmobiliaria.request.ApiClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class PropiedadesContainerViewModel extends AndroidViewModel {
     private MutableLiveData<ViewPageAdapter> adapterMutableLiveData;
     private Application app;
+    private Context context;
+
     public PropiedadesContainerViewModel(@NonNull Application application) {
         super(application);
         app = application;
+        context = application.getApplicationContext();
     }
 
     public LiveData<ViewPageAdapter> getAdapter(){
@@ -34,20 +45,30 @@ public class PropiedadesContainerViewModel extends AndroidViewModel {
         return adapterMutableLiveData;
     }
 
-    public void cargarDatos(FragmentManager fm){
-        int x = 1;
-        ArrayList<Inmueble> lista = new ArrayList<>();
-        Inmueble inm1 = new Inmueble("Nose", 2, "Casa", "Residencial", 10000, true, 1, true);
-        Inmueble inm2 = new Inmueble("Nose2", 2, "Departamento", "Residencial", 9000, true, 2, false);
-        Inmueble inm3 = new Inmueble("Plaza Parque", 3, "Casa", "Residencial", 19000, false, 3, false);
-        lista.add(inm1);
-        lista.add(inm2);
-        lista.add(inm3);
-        ViewPageAdapter vpa = new ViewPageAdapter(fm, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        for (Inmueble i: lista) {
-            vpa.addFragment(new PropiedadesFragment(i), "Propiedad" + x);
-            x++;
-        }
-        adapterMutableLiveData.setValue(vpa);
+    public void cargarDatos(final FragmentManager fm){
+        SharedPreferences pref = context.getSharedPreferences("token", 0);
+        String t = pref.getString("token", "vacio");
+        Call<List<Inmueble>> token = ApiClient.getMyApiClient().obtenerMisInmuebles(t);
+        token.enqueue(new Callback<List<Inmueble>>() {
+            @Override
+            public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
+                if(response.isSuccessful()){
+                    int x = 1;
+                    ViewPageAdapter vpa = new ViewPageAdapter(fm, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+                    for (Inmueble i: response.body()) {
+                        vpa.addFragment(new PropiedadesFragment(i), "Propiedad" + x);
+                        x++;
+                    }
+                    adapterMutableLiveData.setValue(vpa);
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Inmueble>> call, Throwable t) {
+                Toast.makeText(getApplication().getApplicationContext(), t.getMessage() , Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

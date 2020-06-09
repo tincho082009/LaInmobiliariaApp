@@ -130,7 +130,8 @@
             android:id="@+id/btnEditarPropiedad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="44dp"
             android:background="@drawable/button_rounded"
             android:text="Editar"
             android:textColor="#f5f5f5"
@@ -170,6 +171,18 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnBorrarInmueble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_rounded"
+            android:text="Borrar"
+            android:textColor="#f5f5f5"
+            app:layout_constraintEnd_toStartOf="@+id/btnEditarPropiedad"
+            app:layout_constraintTop_toBottomOf="@+id/cbDisponible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

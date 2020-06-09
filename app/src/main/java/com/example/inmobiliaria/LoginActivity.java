@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 public class LoginActivity extends AppCompatActivity {
     EditText email, contrasenia;
@@ -22,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         configurarVista();
-        lvm = new LoginViewModel();
+        lvm = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(LoginViewModel.class);
         lvm.getCartelEmail().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -35,13 +36,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onChanged(String s) {
                 cartelContrasenia.setText(s);
                 cartelContrasenia.setTextColor(0xffff0000);
-            }
-        });
-        lvm.getActivadorIntent().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(i);
             }
         });
     }

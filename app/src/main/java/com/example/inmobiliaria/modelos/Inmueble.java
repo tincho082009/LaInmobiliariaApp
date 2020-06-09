@@ -1,6 +1,7 @@
 package com.example.inmobiliaria.modelos;
 
 public class Inmueble {
+    private int id;
     private String direccion;
     private int cantAmbientes;
     private String tipo;
@@ -13,7 +14,8 @@ public class Inmueble {
     public Inmueble() {
 
     }
-    public Inmueble(String direccion, int cantAmbientes, String tipo, String uso, double precio, boolean estado, int propietarioId, boolean alquilada) {
+    public Inmueble(int id, String direccion, int cantAmbientes, String tipo, String uso, double precio, boolean estado, int propietarioId, boolean alquilada) {
+        this.id = id;
         this.direccion = direccion;
         this.cantAmbientes = cantAmbientes;
         this.tipo = tipo;
@@ -24,6 +26,13 @@ public class Inmueble {
         this.alquilada = alquilada;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getDireccion() {
         return direccion;
     }
