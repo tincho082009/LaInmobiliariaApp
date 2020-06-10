@@ -54,9 +54,9 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(context, "Usuario agregado correctamente", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Inmueble agregado correctamente", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(context, "Usuario NO AGREGADO", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Inmueble NO AGREGADO", Toast.LENGTH_LONG).show();
                 }
             }
 

@@ -172,7 +172,6 @@ public class PropiedadesViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(context, t.getMessage() ,Toast.LENGTH_LONG).show();
             }
         });
     }
