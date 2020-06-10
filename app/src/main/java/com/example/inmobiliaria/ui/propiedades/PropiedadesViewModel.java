@@ -123,7 +123,7 @@ public class PropiedadesViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(context, response.body(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, response.body() + "",Toast.LENGTH_LONG).show();
                 }else{
                     try {
                         Toast.makeText(context, response.errorBody().string(),Toast.LENGTH_LONG).show();
@@ -135,7 +135,7 @@ public class PropiedadesViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Toast.makeText(context, t.getMessage() ,Toast.LENGTH_LONG).show();
             }
         });
     }

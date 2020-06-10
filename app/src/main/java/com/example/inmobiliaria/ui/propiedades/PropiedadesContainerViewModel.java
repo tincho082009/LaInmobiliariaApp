@@ -56,7 +56,7 @@ public class PropiedadesContainerViewModel extends AndroidViewModel {
                     int x = 1;
                     ViewPageAdapter vpa = new ViewPageAdapter(fm, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
                     for (Inmueble i: response.body()) {
-                        vpa.addFragment(new PropiedadesFragment(i), "Propiedad" + x);
+                        vpa.addFragment(new PropiedadesFragment(i), "Propiedad " + x);
                         x++;
                     }
                     adapterMutableLiveData.setValue(vpa);

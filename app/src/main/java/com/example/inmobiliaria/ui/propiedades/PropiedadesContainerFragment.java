@@ -65,7 +65,7 @@ public class PropiedadesContainerFragment extends Fragment implements Propiedade
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Toast.makeText(getContext(), tab.getText(), Toast.LENGTH_LONG ).show();
+                //Toast.makeText(getContext(), tab.getText(), Toast.LENGTH_LONG ).show();
             }
 
             @Override
