@@ -15,16 +15,21 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.inmobiliaria.R;
 import com.example.inmobiliaria.modelos.Inmueble;
 
+import java.util.List;
+
 public class PropiedadesFragment extends Fragment {
-    private EditText etDomicilio, etAmbientes, etTipo, etUso, etPrecio;
+    private EditText etDomicilio, etAmbientes,etUso, etPrecio;
+    private Spinner spTipo;
     private TextView tvCartel;
     private CheckBox cbDisponible;
     private Button btnEditar, btnBorrar;
@@ -48,8 +53,7 @@ public class PropiedadesFragment extends Fragment {
                 etDomicilio.setEnabled(false);
                 etAmbientes.setText(inmueble.getCantAmbientes()+"");
                 etAmbientes.setEnabled(false);
-                etTipo.setText(inmueble.getTipo());
-                etTipo.setEnabled(false);
+                spTipo.setEnabled(false);
                 etUso.setText(inmueble.getUso());
                 etUso.setEnabled(false);
                 etPrecio.setText(inmueble.getPrecio() +"");
@@ -62,7 +66,7 @@ public class PropiedadesFragment extends Fragment {
             public void onChanged(Boolean aBoolean) {
                 etDomicilio.setEnabled(aBoolean);
                 etAmbientes.setEnabled(aBoolean);
-                etTipo.setEnabled(aBoolean);
+                spTipo.setEnabled(aBoolean);
                 etUso.setEnabled(aBoolean);
                 etPrecio.setEnabled(aBoolean);
                 cbDisponible.setEnabled(aBoolean);
@@ -81,7 +85,13 @@ public class PropiedadesFragment extends Fragment {
                 tvCartel.setTextColor(Color.parseColor("#D35400"));
             }
         });
-
+        vm.getListadoTipos().observe(this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, strings);
+                spTipo.setAdapter(adapter);
+            }
+        });
     }
 
     @Override
@@ -92,21 +102,20 @@ public class PropiedadesFragment extends Fragment {
         tvCartel = root.findViewById(R.id.tvCartelPropiedades);
         etDomicilio = root.findViewById(R.id.etDomicilio);
         etAmbientes = root.findViewById(R.id.etAmbiente);
-        etTipo = root.findViewById(R.id.etTipo);
+        spTipo = root.findViewById(R.id.spTipo);
         etUso = root.findViewById(R.id.etUso);
         etPrecio = root.findViewById(R.id.etPrecio);
         cbDisponible = root.findViewById(R.id.cbDisponible);
         btnEditar = root.findViewById(R.id.btnEditarPropiedad);
         btnBorrar = root.findViewById(R.id.btnBorrarInmueble);
         vm.rellenar(inm);
-
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 inmRenovado.setId(inm.getId());
                 inmRenovado.setDireccion(etDomicilio.getText().toString());
                 inmRenovado.setUso(etUso.getText().toString());
-                inmRenovado.setTipo(etTipo.getText().toString());
+                inmRenovado.setTipo(spTipo.getSelectedItem().toString());
                 inmRenovado.setPrecio(Double.valueOf(etPrecio.getText().toString()));
                 inmRenovado.setCantAmbientes(Integer.parseInt(etAmbientes.getText().toString()));
                 inmRenovado.setEstado(cbDisponible.isChecked());

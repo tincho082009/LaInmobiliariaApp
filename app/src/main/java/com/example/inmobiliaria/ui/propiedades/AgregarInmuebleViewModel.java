@@ -7,9 +7,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.inmobiliaria.modelos.Inmueble;
 import com.example.inmobiliaria.request.ApiClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,9 +22,27 @@ import retrofit2.Response;
 
 public class AgregarInmuebleViewModel extends AndroidViewModel {
     private Context context;
+    private MutableLiveData<List<String>> listadoTipos;
+
     public AgregarInmuebleViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
+    }
+
+    public LiveData<List<String>> getListadoTipos(){
+        if(listadoTipos == null){
+            listadoTipos = new MutableLiveData<>();
+        }
+        return listadoTipos;
+    }
+
+    public void cargarSpinner(){
+        List<String> listaTipos = new ArrayList<>();
+        listaTipos.add("Casa");
+        listaTipos.add("Departamento");
+        listaTipos.add("Monoambiente");
+        listaTipos.add("Mansion");
+        listadoTipos.setValue(listaTipos);
     }
 
     public void guardar(Inmueble inm){

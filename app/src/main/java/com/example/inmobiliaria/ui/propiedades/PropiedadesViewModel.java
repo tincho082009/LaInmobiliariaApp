@@ -32,6 +32,7 @@ public class PropiedadesViewModel extends AndroidViewModel {
     private MutableLiveData<String> cartel;
     private MutableLiveData<List<String>> listaDirecciones;
     private Context context;
+    private MutableLiveData<List<String>> listadoTipos;
 
     public PropiedadesViewModel(@NonNull Application application) {
         super(application);
@@ -43,6 +44,13 @@ public class PropiedadesViewModel extends AndroidViewModel {
             inmuebleMutableLiveData = new MutableLiveData<>();
         }
         return inmuebleMutableLiveData;
+    }
+
+    public LiveData<List<String>> getListadoTipos(){
+        if(listadoTipos == null){
+            listadoTipos = new MutableLiveData<>();
+        }
+        return listadoTipos;
     }
 
     public LiveData<String> getCartel(){
@@ -67,9 +75,37 @@ public class PropiedadesViewModel extends AndroidViewModel {
     }
 
     public void rellenar(Inmueble inm){
+        List<String> listaTipos = new ArrayList<>();
         inm1 = inm;
         inmuebleMutableLiveData.setValue(inm);
         estado.setValue(false);
+        switch (inm.getTipo()){
+            case "Casa":
+                listaTipos.add("Casa");
+                listaTipos.add("Departamento");
+                listaTipos.add("Monoambiente");
+                listaTipos.add("Mansion");
+            break;
+            case "Departamento":
+                listaTipos.add("Departamento");
+                listaTipos.add("Casa");
+                listaTipos.add("Monoambiente");
+                listaTipos.add("Mansion");
+                break;
+            case "Monoambiente":
+                listaTipos.add("Monoambiente");
+                listaTipos.add("Departamento");
+                listaTipos.add("Casa");
+                listaTipos.add("Mansion");
+                break;
+            case "Mansion":
+                listaTipos.add("Mansion");
+                listaTipos.add("Monoambiente");
+                listaTipos.add("Departamento");
+                listaTipos.add("Casa");
+                break;
+        }
+        listadoTipos.setValue(listaTipos);
         alquilada = !inm.isAlquilada();
 
     }
@@ -101,6 +137,7 @@ public class PropiedadesViewModel extends AndroidViewModel {
                         inmuebleMutableLiveData.setValue(response.body());
                         textoBoton.setValue("Editar");
                         estado.setValue(false);
+                        cartel.setValue("Propiedad editada exitosamente");
                     }
                 }
 

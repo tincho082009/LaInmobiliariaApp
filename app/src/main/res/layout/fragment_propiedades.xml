@@ -33,18 +33,6 @@
             app:layout_constraintTop_toBottomOf="@+id/etDomicilio" />
 
         <EditText
-            android:id="@+id/etTipo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:hint="Tipo"
-            android:inputType="textPersonName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-        <EditText
             android:id="@+id/etAmbiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,7 +77,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.041"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etTipo" />
+            app:layout_constraintTop_toBottomOf="@+id/spTipo" />
 
         <EditText
             android:id="@+id/etPrecio"
@@ -183,6 +171,15 @@
             android:textColor="#f5f5f5"
             app:layout_constraintEnd_toStartOf="@+id/btnEditarPropiedad"
             app:layout_constraintTop_toBottomOf="@+id/cbDisponible" />
+
+        <Spinner
+            android:id="@+id/spTipo"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
